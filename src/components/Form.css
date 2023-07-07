@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap");
+
+#mainDiv {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#form {
+  /* border: 1px solid black; */
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 8px;
+  /* box-shadow: 0px 6px 34px -13px; */
+  padding: 10px;
+  background-color: white;
+}
+
+#form div label {
+  margin-left: 10px;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Teko", sans-serif;
+}
+
+#form div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+input,
+textarea {
+  padding: 10px 15px;
+  margin: 0 10px;
+  outline: none;
+  border: 1px solid green;
+  border-radius: 8px;
+  width: 300px;
+  height: 20px;
+  color: grey;
+}
+button {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: #22cb5c;
+  color: white;
+  outline: none;
+  border: none;
+  font-family: "Teko", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #28ef6d;
+}
