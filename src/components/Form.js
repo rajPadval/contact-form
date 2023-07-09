@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Form.css";
 
 // below i imported react toastify
@@ -13,15 +13,63 @@ const Form = () => {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-  const addPost = () => {
-    toast.success("Form Submitted");
-    // api call karnege jo apna data backend pe push karega
+  const addPost = async () => {
+    // Validating Form Data
+    if (!name && email) {
+      toast.error("Please enter required field ");
+    } else {
+      if (name.length < 3) {
+        toast.error("Please enter valid name");
+      } else {
+        const number = Number(phone); // typecasting
+        const phoneStr = phone.toString();
 
-    // data server pe jane ke baad
-    setName("");
-    setEmail("");
-    setPhone("");
-    setMessage("");
+        if (
+          isNaN(number) ||
+          phone.length < 10 ||
+          phone.length > 10 ||
+          (phoneStr.charAt(0) != "6" &&
+            phoneStr.charAt(0) != "7" &&
+            phoneStr.charAt(0) != "8" &&
+            phoneStr.charAt(0) != "9") == true
+        ) {
+          toast.error("Please enter a valid phone number");
+        } else {
+          if (!email.includes("@") || !email.includes(".")) {
+            toast.error("Please enter a valid email");
+          } else {
+            const data = {
+              name,
+              phone,
+              message,
+              email,
+            };
+
+            const response = await fetch(
+              "http://localhost:5000/api/post-data",
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(data),
+              }
+            );
+
+            console.log(response);
+            toast.success("Form Submitted");
+
+            // data server pe jane ke baad
+            setName("");
+            setEmail("");
+            setPhone("");
+            setMessage("");
+          }
+        }
+      }
+    }
+
+    // api call karnege jo apna data backend pe push karega
   };
 
   return (
@@ -44,6 +92,7 @@ const Form = () => {
           <div>
             <label htmlFor="fullName">Full Name :</label>
             <input
+              required
               type="text"
               name="fullName"
               id=""
@@ -59,6 +108,7 @@ const Form = () => {
           <div>
             <label htmlFor="email">Email :</label>
             <input
+              required
               type="email"
               name="email"
               id=""
@@ -74,6 +124,7 @@ const Form = () => {
           <div>
             <label htmlFor="phone">Phone :</label>
             <input
+              required
               type="tel"
               name="phone"
               id=""
@@ -101,9 +152,11 @@ const Form = () => {
           </div>
 
           {/* button */}
-          <button type="submit" onClick={addPost}>
-            Submit
-          </button>
+          <div>
+            <button type="submit" onClick={addPost}>
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </>

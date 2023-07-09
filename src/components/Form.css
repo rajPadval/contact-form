@@ -44,7 +44,6 @@ textarea {
   color: grey;
 }
 button {
-  width: 100%;
   border-radius: 5px;
   margin-top: 10px;
   padding: 5px 10px;
@@ -60,3 +59,4 @@ button {
 button:hover {
   background-color: #28ef6d;
 }
+
